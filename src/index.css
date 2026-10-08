@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-bold {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 12s linear infinite;
+}
+
+.animate-marquee-bold:hover {
+  animation-play-state: paused;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  header, footer, nav, .print\:hidden {
+    display: none !important;
+  }
+  #printable-area {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-shadow: none !important;
+  }
+}

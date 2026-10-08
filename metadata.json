@@ -1,0 +1,6 @@
+{
+  "name": "Labe College of Nursing Sciences, Gboko",
+  "description": "Official Website, Content Management System, and Comprehensive College Management Portal for Labe College of Nursing Sciences, Gboko (Catholic Diocese of Gboko).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

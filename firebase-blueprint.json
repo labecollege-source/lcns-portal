@@ -1,0 +1,190 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "General college and branding information manageable via CMS.",
+      "type": "object",
+      "properties": {
+        "collegeName": { "type": "string" },
+        "shortName": { "type": "string" },
+        "motto": { "type": "string" },
+        "diocese": { "type": "string" },
+        "address": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "primaryColor": { "type": "string" },
+        "darkGreen": { "type": "string" },
+        "goldColor": { "type": "string" },
+        "redColor": { "type": "string" }
+      },
+      "required": ["collegeName", "motto", "diocese"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role-based access control.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "provost", "registrar", "admission_officer", "exam_officer", "hod_nursing", "bursar", "lecturer", "student", "applicant"] },
+        "department": { "type": "string" },
+        "phone": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Programme": {
+      "title": "Programme",
+      "description": "Academic programmes offered by the college.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "duration": { "type": "string" },
+        "entryRequirements": { "type": "string" },
+        "description": { "type": "string" },
+        "admissionStatus": { "type": "string", "enum": ["open", "closed"] },
+        "active": { "type": "boolean" }
+      },
+      "required": ["name", "code", "duration", "admissionStatus"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "College courses for programmes.",
+      "type": "object",
+      "properties": {
+        "code": { "type": "string" },
+        "title": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "number" },
+        "semester": { "type": "string", "enum": ["first", "second"] },
+        "creditUnits": { "type": "number" },
+        "type": { "type": "string", "enum": ["compulsory", "elective"] },
+        "approved": { "type": "boolean" }
+      },
+      "required": ["code", "title", "level", "semester", "creditUnits"]
+    },
+    "Applicant": {
+      "title": "Applicant",
+      "description": "Prospective student post-UTME application.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "jambRegNo": { "type": "string" },
+        "jambScore": { "type": "number" },
+        "chosenProgramme": { "type": "string" },
+        "applicationStatus": { "type": "string", "enum": ["applied", "payment_verified", "under_review", "eligible", "admitted", "acceptance_paid", "rejected"] },
+        "admissionPin": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "jambRegNo", "chosenProgramme", "applicationStatus"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Admitted student record.",
+      "type": "object",
+      "properties": {
+        "admissionNumber": { "type": "string" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "programme": { "type": "string" },
+        "level": { "type": "number" },
+        "session": { "type": "string" },
+        "semester": { "type": "string" },
+        "financialClearance": { "type": "boolean" }
+      },
+      "required": ["admissionNumber", "fullName", "email", "programme", "level"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Financial payment transaction records.",
+      "type": "object",
+      "properties": {
+        "payerId": { "type": "string" },
+        "payerName": { "type": "string" },
+        "paymentType": { "type": "string", "enum": ["post_utme", "acceptance_fee", "school_fees", "hostel"] },
+        "amount": { "type": "number" },
+        "reference": { "type": "string" },
+        "gateway": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "success", "failed", "voided"] },
+        "receiptNumber": { "type": "string" }
+      },
+      "required": ["payerName", "paymentType", "amount", "reference", "status"]
+    },
+    "Result": {
+      "title": "Result",
+      "description": "Semester academic results and computation.",
+      "type": "object",
+      "properties": {
+        "studentId": { "type": "string" },
+        "admissionNumber": { "type": "string" },
+        "studentName": { "type": "string" },
+        "session": { "type": "string" },
+        "semester": { "type": "string" },
+        "level": { "type": "number" },
+        "gpa": { "type": "number" },
+        "cgpa": { "type": "number" },
+        "approvalStage": { "type": "string", "enum": ["lecturer_submitted", "hod_approved", "exam_checked", "registrar_approved", "provost_published"] },
+        "published": { "type": "boolean" }
+      },
+      "required": ["admissionNumber", "session", "semester", "approvalStage", "published"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Audit trails for security, scores, admissions and financial transactions.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "role": { "type": "string" },
+        "action": { "type": "string" },
+        "recordAffected": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["userName", "action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/site_settings/{settingId}": {
+      "schema": "SiteSettings",
+      "description": "Website CMS and college settings."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and RBAC role mappings."
+    },
+    "/programmes/{programmeId}": {
+      "schema": "Programme",
+      "description": "College academic programmes."
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "Approved and managed courses."
+    },
+    "/applicants/{applicantId}": {
+      "schema": "Applicant",
+      "description": "Applicant registrations and admission workflow."
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Enrolled student profiles and clearance."
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Bursary and online payment transactions."
+    },
+    "/results/{resultId}": {
+      "schema": "Result",
+      "description": "Student semester examination results and clearance."
+    },
+    "/audit_logs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Immutable security and action audit trails."
+    }
+  }
+}

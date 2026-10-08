@@ -1,0 +1,15 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /college-media/{allPaths=**} {
+      allow read: if true;
+      // The app uses its own institutional login layer rather than Firebase Auth.
+      // Limit uploads to image files no larger than 5MB.
+      allow write: if request.resource != null
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+      allow delete: if true;
+    }
+  }
+}
